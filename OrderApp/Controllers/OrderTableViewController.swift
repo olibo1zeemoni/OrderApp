@@ -40,14 +40,25 @@ class OrderTableViewController: UITableViewController {
     }
     
     func configure(_ cell: UITableViewCell, forItem indexPath: IndexPath){
+        guard let cell = cell as? MenuItemCell else{ return }
+         
+         //let menuItem = menusItems[indexPath.row]
+         
         let menuItem = MenuController.shared.order.menuItems[indexPath.row]
-        var content = cell.defaultContentConfiguration()
-        content.text = menuItem.name
-        content.secondaryText = menuItem.price.formatted(.currency(code: "usd"))
-        content.image = UIImage(systemName: "photo.on.rectangle")
+         cell.itemName = menuItem.name
+         cell.itemPrice = menuItem.price
+         cell.image = nil
+         cell.tintColor = #colorLiteral(red: 0.4062065482, green: 0.3149974644, blue: 0.7378988862, alpha: 1)
        
-        content.textProperties.color = #colorLiteral(red: 0.4079208076, green: 0.3443185091, blue: 1, alpha: 1)
-        cell.contentConfiguration = content
+        
+        
+//        var content = cell.defaultContentConfiguration()
+//        content.text = menuItem.name
+//        content.secondaryText = menuItem.price.formatted(.currency(code: "usd"))
+//        content.image = UIImage(systemName: "photo.on.rectangle")
+//
+//        content.textProperties.color = #colorLiteral(red: 0.4079208076, green: 0.3443185091, blue: 1, alpha: 1)
+//        cell.contentConfiguration = content
         
         Task{
             if let image = try? await MenuController.shared.fetchPhoto(from: menuItem.imageURL){
