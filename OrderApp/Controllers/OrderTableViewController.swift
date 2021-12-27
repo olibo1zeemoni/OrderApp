@@ -9,6 +9,8 @@ import UIKit
 
 class OrderTableViewController: UITableViewController {
     
+    var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
+    
    var minutesToPrepareOrder = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,25 +53,25 @@ class OrderTableViewController: UITableViewController {
          cell.tintColor = #colorLiteral(red: 0.4062065482, green: 0.3149974644, blue: 0.7378988862, alpha: 1)
        
         
-        
-//        var content = cell.defaultContentConfiguration()
-//        content.text = menuItem.name
-//        content.secondaryText = menuItem.price.formatted(.currency(code: "usd"))
-//        content.image = UIImage(systemName: "photo.on.rectangle")
-//
-//        content.textProperties.color = #colorLiteral(red: 0.4079208076, green: 0.3443185091, blue: 1, alpha: 1)
-//        cell.contentConfiguration = content
-        
-        Task{
+         imageLoadTasks[indexPath] = Task{
             if let image = try? await MenuController.shared.fetchPhoto(from: menuItem.imageURL){
                 if let currentIndexPath = self.tableView.indexPath(for: cell), currentIndexPath == indexPath{
-                    var content = cell.defaultContentConfiguration()
-                    content.text = menuItem.name
-                    content.secondaryText = menuItem.price.formatted(.currency(code: "usd"))       //"$\(menuItem.price)"
-                    content.image = image
-                    cell.contentConfiguration = content
+                    cell.image = image
+                    
                 }
             }
+        
+             imageLoadTasks[indexPath] = nil
+         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        imageLoadTasks[indexPath]?.cancel()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        imageLoadTasks.forEach { key,value in
+            value.cancel()
         }
     }
     
@@ -109,7 +111,7 @@ class OrderTableViewController: UITableViewController {
             do{
                 let minutesToPrepare = try await MenuController.shared.submitOrders(forMenuIds: menuIDs)
                 minutesToPrepareOrder = minutesToPrepare
-                performSegue(withIdentifier: "confirmOrder", sender: nil)
+                self.performSegue(withIdentifier: "confirmOrder", sender: nil)
             } catch{
                 displayError(error, title: "Order Submission failed")
                 
@@ -162,7 +164,7 @@ class OrderTableViewController: UITableViewController {
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
-        return true
+        return false
     }
     
 

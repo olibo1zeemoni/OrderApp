@@ -66,11 +66,11 @@ typealias MinutesToPrepare = Int
         let orderURL = baseURL.appendingPathComponent("order")
         var request = URLRequest(url: orderURL)
         request.httpMethod = "POST"
-        request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let menuIDsDict = ["menuIDs": menuIds]
+        let menuIdsDict = ["menuIds": menuIds]
         let jsonEncoder = JSONEncoder()
-        let jsonData = try? jsonEncoder.encode(menuIDsDict)
+        let jsonData = try? jsonEncoder.encode(menuIdsDict)
         request.httpBody = jsonData
         
         let (data,response) = try await URLSession.shared.data(for: request)
