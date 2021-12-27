@@ -326,7 +326,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cr0-Ue-Hea">
-                                <rect key="frame" x="20" y="375.5" width="374" height="91"/>
+                                <rect key="frame" x="20" y="316.5" width="374" height="209"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for your order, Your wait time is approximately 15 minutes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88r-fq-Eau">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="49.5"/>
@@ -335,7 +335,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaq-4W-WxV">
-                                        <rect key="frame" x="0.0" y="57.5" width="374" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="57.5" width="374" height="151.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain">
                                             <attributedString key="attributedTitle">
@@ -353,18 +353,49 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="J3u-ck-UXW">
+                                <rect key="frame" x="20" y="240" width="374" height="36.5"/>
+                                <subviews>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="bJb-x2-MXQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="4"/>
+                                    </progressView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="DQz-4P-iEL">
+                                        <rect key="frame" x="0.0" y="17" width="374" height="19.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="20 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCQ-2l-6bt">
+                                                <rect key="frame" x="0.0" y="0.0" width="23.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minutes remaining" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dmc-X3-ofF">
+                                                <rect key="frame" x="29.5" y="0.0" width="344.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Prt-LP-X01"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Prt-LP-X01" firstAttribute="trailing" secondItem="J3u-ck-UXW" secondAttribute="trailing" constant="20" id="5Ku-QD-B8w"/>
                             <constraint firstItem="cr0-Ue-Hea" firstAttribute="centerY" secondItem="HJG-et-IeV" secondAttribute="centerY" id="CcX-hq-1Pa"/>
+                            <constraint firstItem="cr0-Ue-Hea" firstAttribute="top" secondItem="J3u-ck-UXW" secondAttribute="bottom" constant="40" id="S7V-GV-1jC"/>
+                            <constraint firstItem="J3u-ck-UXW" firstAttribute="leading" secondItem="Prt-LP-X01" secondAttribute="leading" constant="20" id="VS3-0l-hmX"/>
                             <constraint firstItem="cr0-Ue-Hea" firstAttribute="leading" secondItem="Prt-LP-X01" secondAttribute="leading" constant="20" id="fAQ-Ed-Vnt"/>
                             <constraint firstAttribute="trailing" secondItem="cr0-Ue-Hea" secondAttribute="trailing" constant="20" id="idK-yH-IjN"/>
+                            <constraint firstItem="J3u-ck-UXW" firstAttribute="top" secondItem="Prt-LP-X01" secondAttribute="top" constant="240" id="rDH-Zx-yWO"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dismissButton" destination="gaq-4W-WxV" id="Atj-sv-SWc"/>
                         <outlet property="orderConfirmLabel" destination="88r-fq-Eau" id="PLN-sp-mdx"/>
+                        <outlet property="progressBar" destination="bJb-x2-MXQ" id="G9u-2X-sKG"/>
+                        <outlet property="progressBarLabel" destination="QCQ-2l-6bt" id="rsS-BG-7xu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mxe-NT-itA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -425,6 +456,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="c4c-5G-Qu7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LEn-Rs-Qgg">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.56573438529999998" green="0.36866158900000001" blue="0.89658301770000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
