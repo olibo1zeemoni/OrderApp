@@ -378,17 +378,30 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icY-Ss-qBo">
+                                <rect key="frame" x="41.5" y="97" width="331" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Create 10 minute alert"/>
+                                <connections>
+                                    <action selector="createAlertTapped:" destination="gPY-cR-PJj" eventType="touchUpInside" id="U9k-BH-XIZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Prt-LP-X01"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Prt-LP-X01" firstAttribute="trailing" secondItem="J3u-ck-UXW" secondAttribute="trailing" constant="20" id="5Ku-QD-B8w"/>
+                            <constraint firstItem="icY-Ss-qBo" firstAttribute="top" secondItem="HJG-et-IeV" secondAttribute="top" constant="97" id="8CH-p2-YnE"/>
+                            <constraint firstAttribute="bottom" secondItem="icY-Ss-qBo" secondAttribute="bottom" constant="714" id="8xw-Se-1KH"/>
                             <constraint firstItem="cr0-Ue-Hea" firstAttribute="centerY" secondItem="HJG-et-IeV" secondAttribute="centerY" id="CcX-hq-1Pa"/>
+                            <constraint firstItem="icY-Ss-qBo" firstAttribute="width" secondItem="HJG-et-IeV" secondAttribute="width" multiplier="0.8" id="Plt-oX-8jR"/>
                             <constraint firstItem="cr0-Ue-Hea" firstAttribute="top" secondItem="J3u-ck-UXW" secondAttribute="bottom" constant="40" id="S7V-GV-1jC"/>
                             <constraint firstItem="J3u-ck-UXW" firstAttribute="leading" secondItem="Prt-LP-X01" secondAttribute="leading" constant="20" id="VS3-0l-hmX"/>
                             <constraint firstItem="cr0-Ue-Hea" firstAttribute="leading" secondItem="Prt-LP-X01" secondAttribute="leading" constant="20" id="fAQ-Ed-Vnt"/>
                             <constraint firstAttribute="trailing" secondItem="cr0-Ue-Hea" secondAttribute="trailing" constant="20" id="idK-yH-IjN"/>
                             <constraint firstItem="J3u-ck-UXW" firstAttribute="top" secondItem="Prt-LP-X01" secondAttribute="top" constant="240" id="rDH-Zx-yWO"/>
+                            <constraint firstItem="icY-Ss-qBo" firstAttribute="centerX" secondItem="Prt-LP-X01" secondAttribute="centerX" id="rMP-q6-1L8"/>
                         </constraints>
                     </view>
                     <connections>

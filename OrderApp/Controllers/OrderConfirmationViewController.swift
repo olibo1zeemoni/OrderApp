@@ -17,6 +17,8 @@ class OrderConfirmationViewController: UIViewController {
     
     var minutesToPrepare: Int
     
+    let notificationCenter = UNUserNotificationCenter.current()
+    
     init?(coder: NSCoder, minutesToPrepare: Int){
         self.minutesToPrepare = minutesToPrepare
         super.init(coder: coder)
@@ -30,7 +32,7 @@ class OrderConfirmationViewController: UIViewController {
     
     var currentTime = Date().formatted(date: .omitted, time: .shortened)
     
-  
+    
     
     
     
@@ -42,58 +44,91 @@ class OrderConfirmationViewController: UIViewController {
         progressBarLabel.text = String(minutesToPrepare)
         progressBar.progress = 0.0
         callTimer()
-       
         
-        //let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { permissionGranted, error in
+            if (!permissionGranted) {
+                print("Permission Denied")
+            }
+        }
         
         
+        //let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(createAlertTapped(_:)), userInfo: nil, repeats: true)
         
-       // progressBar.setProgress(<#T##progress: Float##Float#>, animated: true)
-
+        
         orderConfirmLabel.text = "Thank you for your order! Your wait time is approximately \(minutesToPrepare) minutes"
         
     }
     
-   
-//    let formatter: DateComponentsFormatter = {
-//        let formatter = DateComponentsFormatter()
-//        formatter.unitsStyle = .full
-//        formatter.allowedUnits = [.minute]
-//        return formatter
-//    }()
-    //let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     
-//    @objc func fireTimer() {
-//        var minutesToUpdate = minutesToPrepare
-//        print("Timer fired!")
-//        minutesToUpdate -= 1
-//
-//        if minutesToPrepare == 0 {
-//            timer.invalidate()
-//        }
-//    }
-//
-//    func returnMinutesRemaining()->Int {
-//        let remaining: TimeInterval = Double(minutesToPrepare * 60) // e.g. 90 minutes represented in seconds
-//
-//         let result = formatter.string(from: remaining) ?? "0"
-//
-//        return Int(result) ?? 0
-//    }
+    @IBAction func createAlertTapped(_ sender: UIButton) {
+        notificationCenter.getNotificationSettings { [self] (settings) in
+            
+            DispatchQueue.main.async {
+                if(settings.authorizationStatus == .authorized){
+                    let content = UNMutableNotificationContent()
+                    content.title = "Order App"
+                    content.body = "Order will ready in 10 minutes"
+                    content.sound = UNNotificationSound.default
+                    content.badge = 1
+                    
+                    
+                    
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    
+                    self.notificationCenter.add(request){(error) in
+                        if(error != nil) {
+                            print("Error" + error.debugDescription)
+                            return
+                        }
+                    }
+                    
+                    let alertDialog = UIAlertController(title: "Order App", message: "Your Order will be ready in 10 minutes", preferredStyle: .alert)
+                    alertDialog.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+                    self.present(alertDialog, animated: true)
+                } else  {
+                    
+                    let alertDialog  = UIAlertController(title: "Enable Notifications? ", message: "To use this feature you must enable notifications in settings", preferredStyle: .alert)
+                    let goToSettings = UIAlertAction(title: "Settings", style: .default) { (_) in
+                        guard let settingsURL = URL(string: UIApplication.openSettingsURLString)
+                        else{ return}
+                        
+                        if(UIApplication.shared.canOpenURL(settingsURL)){
+                            UIApplication.shared.open(settingsURL, options: [:]) { _ in
+                                
+                            }
+                        }
+                        
+                    }
+                    
+                    alertDialog.addAction(goToSettings)
+                    alertDialog.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+                    self.present(alertDialog, animated: true)
+                    
+                }
+            }
+            
+            
+        }
+        
+    }
+    
     var runCount = 0
     
-    func callTimer()  { Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
+    func callTimer()  { Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
         let progress = Float(1.0 / Double(self.minutesToPrepare))
         print("Timer fired!")
         self.progressBarLabel.text = String(self.minutesToPrepare - self.runCount - 1)
         self.progressBar.progress += progress
         self.runCount += 1
-
+        
         if self.runCount == self.minutesToPrepare {
             timer.invalidate()
         }
-      
-      }
+        
     }
-
+    }
+    
+    
+    
 }
