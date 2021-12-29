@@ -67,7 +67,7 @@ class OrderConfirmationViewController: UIViewController {
                 if(settings.authorizationStatus == .authorized){
                     let content = UNMutableNotificationContent()
                     content.title = "Order App"
-                    content.body = "Order will ready in 10 minutes"
+                    content.body = "Order will be ready in 10 minutes"
                     content.sound = UNNotificationSound.default
                     content.badge = 1
                     

@@ -56,7 +56,7 @@
         <!--Menu Table View Controller-->
         <scene sceneID="lV9-Oc-JvP">
             <objects>
-                <tableViewController id="HGp-os-1Dh" customClass="MenuTableViewController" customModule="OrderApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="menu" id="HGp-os-1Dh" customClass="MenuTableViewController" customModule="OrderApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="X4y-St-1tE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,7 +104,7 @@
         <!--Detail View Controller-->
         <scene sceneID="lCU-02-JBe">
             <objects>
-                <viewController id="8hN-tN-FcA" customClass="DetailViewController" customModule="OrderApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="menuItemDetail" id="8hN-tN-FcA" customClass="DetailViewController" customModule="OrderApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="duD-eS-5iA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

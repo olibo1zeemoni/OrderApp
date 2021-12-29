@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+//let someURl = URL(string: "https://1673-197-159-139-219.ngrok.io/images/4.png")!
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
@@ -73,6 +73,10 @@ class DetailViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MenuController.shared.updateUserActivity(controller: .menuItemDetail(menuItem))
+    }
     
 
 }

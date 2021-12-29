@@ -12,9 +12,12 @@ class MenuController {
     var order = Order(){
         didSet{
             NotificationCenter.default.post(name: MenuController.orderUpdatedNotification, object: nil)
+            userActivity.order = order
         }
     }
     static let orderUpdatedNotification = Notification.Name("MenuController.orderUpdated")
+    
+    var userActivity = NSUserActivity(activityType: "com.zeemoni.OrderApp.order")
     
     let baseURL = URL(string: "http://localhost:8080/")!
 
@@ -97,6 +100,20 @@ typealias MinutesToPrepare = Int
         }
                 return image
     }
+    
+    func updateUserActivity(controller: StateRestorationController){
+        switch controller {
+        case .menu(let category):
+            userActivity.menuCategory = category
+        case .menuItemDetail(let menuItem):
+            userActivity.menuItem = menuItem
+        case .order, .categories:
+            break
+        }
+        userActivity.controllerIdentifier = controller.identifier
+    }
+    
+    
 
 
 }

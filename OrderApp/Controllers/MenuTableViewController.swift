@@ -117,6 +117,11 @@ class MenuTableViewController: UITableViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MenuController.shared.updateUserActivity(controller: .menu(category: category))
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

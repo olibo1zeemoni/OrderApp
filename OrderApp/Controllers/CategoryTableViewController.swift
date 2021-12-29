@@ -9,7 +9,7 @@ import UIKit
 
 @MainActor
 class CategoryTableViewController: UITableViewController {
-    static let sharer = CategoryTableViewController()
+    //static let sharer = CategoryTableViewController()
     var categories: [String] = []
    
     
@@ -94,6 +94,10 @@ class CategoryTableViewController: UITableViewController {
        
     }
    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MenuController.shared.updateUserActivity(controller: .categories)
+    }
 
   
 

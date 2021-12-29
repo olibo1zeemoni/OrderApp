@@ -140,18 +140,11 @@ class OrderTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            MenuController.shared.order.menuItems.remove(at: indexPath.row)
-            
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-        } //else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        //}
+            MenuController.shared.order.menuItems.remove(at: indexPath.row)}
+        
     }
-    
-
-//    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        return .delete
-//    }
+            
+     
     
      //Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -166,7 +159,10 @@ class OrderTableViewController: UITableViewController {
         // Return false if you do not want the item to be re-orderable.
         return false
     }
-    
+            override func viewDidAppear(_ animated: Bool) {
+                super.viewDidAppear(animated)
+                MenuController.shared.updateUserActivity(controller: .order)
+            }
 
  
 

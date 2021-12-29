@@ -20,6 +20,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
         
     }
+    
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        return MenuController.shared.userActivity
+    }
+    
+    func scene(_ scene: UIScene, restoreInteractionStateWith stateRestorationActivity: NSUserActivity) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let restoredOrder = stateRestorationActivity.order {
+            MenuController.shared.order = restoredOrder
+        }
+        guard
+            let restorationController = StateRestorationController(userActivity: stateRestorationActivity),
+            let tabBarController = window?.rootViewController as? UITabBarController, tabBarController.viewControllers?.count == 2,
+            let categoryTableViewController = (tabBarController.viewControllers?[0] as? UINavigationController)?.topViewController as? CategoryTableViewController
+                
+        else {
+            return
+        }
+        
+        switch restorationController {
+        case .categories:
+            break
+        case .menu(let category):
+            let menuTableViewController = storyboard.instantiateViewController(identifier: restorationController.identifier.rawValue, creator: { (coder) in
+                return MenuTableViewController(coder: coder, category: category)
+            })
+            categoryTableViewController.navigationController?.pushViewController(menuTableViewController, animated: true)
+        case .menuItemDetail(let menuItem):
+            let menuTableViewController = storyboard.instantiateViewController(identifier: StateRestorationController.Identifier.menu.rawValue) { (coder) in
+                return MenuTableViewController(coder: coder, category: menuItem.category)
+            }
+            let detailViewController = storyboard.instantiateViewController(identifier: restorationController.identifier.rawValue) { (coder) in
+                return DetailViewController(coder: coder, menuItem: menuItem)
+            }
+            categoryTableViewController.navigationController?.pushViewController(menuTableViewController, animated: false)
+            categoryTableViewController.navigationController?.pushViewController(detailViewController, animated: false)
+            
+        case .order:
+            tabBarController.selectedIndex = 1
+        }
+            
+    }
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

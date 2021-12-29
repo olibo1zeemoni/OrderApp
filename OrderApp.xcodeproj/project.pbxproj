@@ -22,6 +22,7 @@
 		F57C5C8327744D0200443D58 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C5C8227744D0200443D58 /* MenuController.swift */; };
 		F57C5C86277698E300443D58 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C5C85277698E300443D58 /* OrderConfirmationViewController.swift */; };
 		F57C5C8A2776F5B200443D58 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C5C892776F5B200443D58 /* MenuItemCell.swift */; };
+		F584DC64277B4BAD00B907E6 /* Restoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F584DC63277B4BAD00B907E6 /* Restoration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		F57C5C8227744D0200443D58 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		F57C5C85277698E300443D58 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
 		F57C5C892776F5B200443D58 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		F584DC63277B4BAD00B907E6 /* Restoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Restoration.swift; path = OrderApp/Restoration.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			children = (
 				F57C5C6427741B6300443D58 /* Main.storyboard */,
 				F57C5C892776F5B200443D58 /* MenuItemCell.swift */,
+				F584DC63277B4BAD00B907E6 /* Restoration.swift */,
 				F57C5C8427744D2300443D58 /* Network */,
 				F57C5C8127744CB200443D58 /* Controllers */,
 				F57C5C8027744C6300443D58 /* Models */,
@@ -199,6 +202,7 @@
 				F57C5C7927742E5100443D58 /* DetailViewController.swift in Sources */,
 				F57C5C6127741B6300443D58 /* SceneDelegate.swift in Sources */,
 				F57C5C8A2776F5B200443D58 /* MenuItemCell.swift in Sources */,
+				F584DC64277B4BAD00B907E6 /* Restoration.swift in Sources */,
 				F57C5C86277698E300443D58 /* OrderConfirmationViewController.swift in Sources */,
 				F57C5C7327742BD400443D58 /* CategoryTableViewController.swift in Sources */,
 			);
